@@ -1,10 +1,19 @@
 # GTM Lead Scoring Pipeline
 
-An automated ICP scoring system that processes B2B company data, scores each account against a weighted qualification rubric, and outputs a tiered prospect list ready for outreach.
+An automated ICP scoring and outreach personalization system that processes B2B company data, scores each account against a weighted qualification rubric, outputs a tiered prospect list, and generates AI-powered personalized outreach lines for Tier 1 accounts.
 
 ## Overview
 
-Processes 994 B2B companies, scores each across four dimensions, and classifies them into actionable tiers for sales and marketing teams.
+Processes 994 B2B companies across a four-stage pipeline: data cleaning, ICP scoring, visualization, and AI outreach personalization. Outputs a fully enriched, tiered prospect list ready for sequencing.
+
+## Pipeline
+
+| Script | What It Does |
+|---|---|
+| src/clean_data.py | Cleans and standardizes raw company data |
+| src/score_leads.py | Scores each company against ICP rubric and assigns tiers |
+| src/visualize.py | Generates tier distribution and score charts |
+| src/personalize.py | Calls LLM API to generate personalized outreach lines for Tier 1 accounts |
 
 ## Scoring Methodology
 
@@ -27,33 +36,29 @@ Processes 994 B2B companies, scores each across four dimensions, and classifies 
 ## How to Run
 
 Install dependencies:
-```
 pip install -r requirements.txt
-```
 
 Clean the data:
-```
 python src/clean_data.py
-```
 
 Run the scoring pipeline:
-```
 python src/score_leads.py
-```
 
 Generate visualizations:
-```
 python src/visualize.py
-```
+
+Generate AI outreach lines for Tier 1 accounts:
+python src/personalize.py
 
 ## Output Files
 
-- `data/crunchbase_clean.csv` — cleaned and standardized company data
-- `output/scored_companies.csv` — all 994 companies with ICP scores and tier assignments
-- `output/top_tier1_companies.csv` — Tier 1 accounts sorted by score, includes contact email and founder name
-- `output/tier_distribution.png` — bar chart of tier distribution
-- `output/score_distribution.png` — histogram of ICP score distribution
-- `output/top_industries_tier1.png` — top industries in Tier 1 accounts
+- data/crunchbase_clean.csv — cleaned and standardized company data
+- output/scored_companies.csv — all 994 companies with ICP scores and tier assignments
+- output/top_tier1_companies.csv — Tier 1 accounts sorted by score, includes contact email and founder name
+- output/tier1_with_outreach.csv — Tier 1 accounts with AI-generated personalized outreach lines
+- output/tier_distribution.png — bar chart of tier distribution
+- output/score_distribution.png — histogram of ICP score distribution
+- output/top_industries_tier1.png — top industries in Tier 1 accounts
 
 ## Data
 
@@ -61,4 +66,4 @@ Data sourced from Crunchbase. Dataset covers 994 real B2B companies funded betwe
 
 ## Tech Stack
 
-Python, pandas, matplotlib, python-dateutil
+Python, pandas, matplotlib, python-dateutil, LLM API
